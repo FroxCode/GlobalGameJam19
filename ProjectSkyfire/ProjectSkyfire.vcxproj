@@ -150,8 +150,7 @@
     <ClCompile Include="src\systems\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\components\AgeComponent.h" />
-    <ClInclude Include="include\components\ArchitectureComponent.h" />
+    <ClInclude Include="include\components\PersonalInformationComponent.h" />
     <ClInclude Include="include\components\BoxColliderComponent.h" />
     <ClInclude Include="include\components\CircleColliderComponent.h" />
     <ClInclude Include="include\components\Component.h" />
@@ -159,7 +158,6 @@
     <ClInclude Include="include\components\FlawsComponent.h" />
     <ClInclude Include="include\components\GravityComponent.h" />
     <ClInclude Include="include\components\MusicComponent.h" />
-    <ClInclude Include="include\components\NameComponent.h" />
     <ClInclude Include="include\components\ParticlePoolComponent.h" />
     <ClInclude Include="include\components\PlayerComponent.h" />
     <ClInclude Include="include\components\SoundComponent.h" />

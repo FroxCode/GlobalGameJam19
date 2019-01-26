@@ -134,22 +134,16 @@
     <ClInclude Include="include\components\ParticlePoolComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="include\components\AgeComponent.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\ArchitectureComponent.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="include\components\DialogueComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="include\components\FlawsComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="include\components\NameComponent.h">
+    <ClInclude Include="include\components\ValuesComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="include\components\ValuesComponent.h">
+    <ClInclude Include="include\components\PersonalInformationComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
