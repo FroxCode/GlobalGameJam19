@@ -6,10 +6,10 @@
 //
 ////////////////////////////////////////////////////////////
 #include "Game.h"
-Game::Game()
+Game::Game() :
+	defaultResolution(highRes)
 {
-	window = std::make_shared<sf::RenderWindow>(sf::VideoMode(1280, 720), "ProjectSkyfire");
-	window->setSize(sf::Vector2u(defaultResolution));
+	window = std::make_shared<sf::RenderWindow>(sf::VideoMode(defaultResolution.x, defaultResolution.y), "House Seducing Simulator 2019");
 	window->clear();
 	window->display();
 }
@@ -64,7 +64,7 @@ void Game::run()
 void Game::initialize()
 {
 	///std::cout << "initializing" << std::endl;
-	sceneManager.initialise();
+	sceneManager.initialise(window);
 }
 void Game::fixedUpdate(sf::Event* e)
 {

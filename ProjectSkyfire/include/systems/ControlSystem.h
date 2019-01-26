@@ -22,5 +22,7 @@ class ControlSystem : public System
 public:
 	void update(sf::Event e);
 
+	
+
 };
 #endif;

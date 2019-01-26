@@ -10,33 +10,63 @@ SceneManager::~SceneManager()
 {
 
 }
-void SceneManager::initialise()
+void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> window)
 {
-	MenuScene* menuScene = new MenuScene("Menu");
-	menuScene->initialise();
+	menuScene = new MenuScene("Menu");
+	menuScene->initialise(window);
 	scenes.push_back(menuScene);
 	currentSceneName = "Menu";
 	std::cout << "init scene manager" << std::endl;
 
-	GameScene* gameScene = new GameScene("Game");
+	gameScene = new GameScene("Game");
 	scenes.push_back(gameScene);
 	
 }
 void SceneManager::fixedUpdate(sf::Event* evt)
 {//spaghetti
-	for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
-		if ((*i)->getName() == currentSceneName)
-		{
-			(*i)->update(evt);
+
+	if (currentSceneName == "Menu")
+	{
+		for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
+			if ((*i)->getName() == "Menu")
+			{
+				static_cast<MenuScene*>(*i)->update(evt);
+				if (static_cast<MenuScene*>(*i)->boinker.playButtonPressed)
+				{
+					setScene("Game");
+				}
+			}
+		}
+	}
+	else if (currentSceneName == "Game")
+	{
+		for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
+			if ((*i)->getName() == "Game")
+			{
+				static_cast<GameScene*>(*i)->update(evt);
+				std::cout << "Updating game scene" << std::endl;
+			}
 		}
 	}
 }
 void SceneManager::render(std::shared_ptr<sf::RenderWindow> window)
 {
-	for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
-		if ((*i)->getName() == currentSceneName)
-		{
-			(*i)->render(window);
+	if (currentSceneName == "Menu")
+	{
+		for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
+			if ((*i)->getName() == "Menu")
+			{
+				static_cast<MenuScene*>(*i)->render(window);
+			}
+		}
+	}
+	else if (currentSceneName == "Game")
+	{
+		for (std::vector<Scene*>::iterator i = scenes.begin(), e = scenes.end(); i != e; i++) {
+			if ((*i)->getName() == "Game")
+			{
+				static_cast<GameScene*>(*i)->render(window);
+			}
 		}
 	}
 }
