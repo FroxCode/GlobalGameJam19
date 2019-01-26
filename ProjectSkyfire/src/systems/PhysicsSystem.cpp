@@ -2,7 +2,7 @@
 #include "components/SpriteComponent.h"
 void PhysicsSystem::update()
 {
-	std::cout << "PhysicsSystem update..." << std::endl;
+	///std::cout << "PhysicsSystem update..." << std::endl;
 	for (std::vector<Entity*>::iterator i = m_entities.begin(), e = m_entities.end(); i != e; i++)
 	{
 		for (int j = 0; j < (*i)->getComponents().size(); j++)
@@ -36,8 +36,8 @@ void PhysicsSystem::update()
 							if (!swapButtonScale)
 							{
 								static_cast<TransformComponent*>((*i)->getComponents().at(j))->setScale(sf::Vector2f(
-									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x + 0.01f,
-									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().y + 0.01f
+									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x + 0.005f,
+									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().y + 0.005f
 								));
 								if (static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x > 1.10f)
 								{
@@ -47,8 +47,8 @@ void PhysicsSystem::update()
 							else
 							{
 								static_cast<TransformComponent*>((*i)->getComponents().at(j))->setScale(sf::Vector2f(
-									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x - 0.01f,
-									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().y - 0.01f
+									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x - 0.005f,
+									static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().y - 0.005f
 								));
 								if (static_cast<TransformComponent*>((*i)->getComponents().at(j))->getScale().x < 1.0f)
 								{

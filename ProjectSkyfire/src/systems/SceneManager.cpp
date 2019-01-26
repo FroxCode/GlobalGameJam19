@@ -12,11 +12,10 @@ SceneManager::~SceneManager()
 }
 void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> window)
 {
+	w = window;
 	menuScene = new MenuScene("Menu");
-	menuScene->initialise(window);
 	scenes.push_back(menuScene);
-	currentSceneName = "Menu";
-	std::cout << "init scene manager" << std::endl;
+	setScene("Menu");
 
 	gameScene = new GameScene("Game");
 	scenes.push_back(gameScene);
@@ -73,4 +72,14 @@ void SceneManager::render(std::shared_ptr<sf::RenderWindow> window)
 void SceneManager::setScene(std::string targetSceneName)
 {
 	currentSceneName = targetSceneName;
+	if (currentSceneName == "Menu")
+	{
+		menuScene = new MenuScene("Menu");
+		menuScene->initialise(w);
+	}
+	else if (currentSceneName == "Game")
+	{
+		gameScene = new GameScene("Game");
+		gameScene->initialise();
+	}
 }

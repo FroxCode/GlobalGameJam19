@@ -37,6 +37,7 @@ public:
 	std::vector<Scene*> scenes;
 	void initialise(std::shared_ptr<sf::RenderWindow> window);
 
+	std::shared_ptr<sf::RenderWindow> w;
 	GameScene* gameScene;
 	MenuScene* menuScene;
 

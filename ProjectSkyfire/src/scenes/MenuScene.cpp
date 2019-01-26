@@ -9,14 +9,14 @@ MenuScene::MenuScene(std::string name) :
 
 }
 
-void MenuScene::initialise(std::shared_ptr<sf::RenderWindow> window)
+void MenuScene::initialise(std::shared_ptr<sf::RenderWindow> &window)
 {
 	boinker.addWindow(window);
 	backgroundImage.addComponent(new SpriteComponent(backgroundImagePath));
 	backgroundImage.addComponent(new TransformComponent());
 
 	playButton.addComponent(new SpriteComponent(playButtonImagePath));
-	playButton.addComponent(new TransformComponent(sf::Vector2f(1320, 480)));
+	playButton.addComponent(new TransformComponent(sf::Vector2f(1300, 460)));
 	playButton.addComponent(new BoxColliderComponent());
 	static_cast<SpriteComponent*>(playButton.getComponents().at(0))->getSprite()->setPosition(
 		static_cast<TransformComponent*>(playButton.getComponents().at(1))->getPosition()
