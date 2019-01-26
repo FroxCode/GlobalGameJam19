@@ -53,33 +53,33 @@ void Game::run()
 		}
 		while(FPS_lag >= MS_PER_UPDATE)
 		{
-			fixedUpdate(event);
+			fixedUpdate(&event);
 			
 			FPS_lag -= MS_PER_UPDATE;
 		}
-		render(); //here lag could be passed to advance physics just before rendering (normalized: lag/ms per update)
+		render(); ///here lag could be passed to advance physics just before rendering (normalized: lag/ms per update: shows objects moving between frames at %speed of progress towards next frame)
 	}
 	std::cout << "Closing...";
 }
 void Game::initialize()
 {
 	///std::cout << "initializing" << std::endl;
+	sceneManager.initialise();
 }
-void Game::update()
-{
-	///std::cout << "updating" << std::endl;
-}
-void Game::fixedUpdate(sf::Event e)
+void Game::fixedUpdate(sf::Event* e)
 {
 	///std::cout << "updating (fixed)" << std::endl;
+	sceneManager.fixedUpdate(e);
+
 }
 void Game::render()
 {
 	///std::cout << "rendering" << std::endl;
-	//TODO: update physics before rendering at % towards next fixed update
+	///TODO: update physics before rendering at % towards next fixed update
 	window->clear(sf::Color::Black);
 
 	///Draw in here
+	sceneManager.render(window);
 
 	window->display();
 }

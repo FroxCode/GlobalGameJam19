@@ -33,6 +33,7 @@
 #include "components/TransformComponent.h"
 #include "components/VelocityComponent.h"
 #include "systems/ParticleSystem.h"
+#include "SceneManager.h"
 
 
 class Game
@@ -63,19 +64,19 @@ private:
 	sf::Vector2i const lowRes = sf::Vector2i(640, 360);
 	sf::Vector2i const medRes = sf::Vector2i(1280, 720);
 	sf::Vector2i const highRes = sf::Vector2i(1920, 1080);
-	sf::Vector2i defaultResolution = medRes;
+	sf::Vector2i const fourKay = sf::Vector2i(3840, 2160);
+	sf::Vector2i defaultResolution = highRes;
 
 	sf::Clock FPS_clock;
 	int const FPS_target = 60;
 	sf::Int32 const MS_PER_UPDATE = 1000 / FPS_target; ///Like FPS, but reversed. How many ms per frame if you want 60fps as target
 
-
+	SceneManager sceneManager;
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
 	void initialize();
-	void update();
-	void fixedUpdate(sf::Event e);
+	void fixedUpdate(sf::Event* e);
 	void render();
 
 };

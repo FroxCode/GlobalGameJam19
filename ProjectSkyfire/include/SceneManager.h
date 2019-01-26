@@ -3,8 +3,8 @@
 // Created by Dale Sinnott
 //
 ////////////////////////////////////////////////////////////
-#ifndef _SCENEMANAGER_H_
-#define _SCENEMANAGER_H_
+#ifndef _SceneManager_H_
+#define _SceneManager_H_
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
@@ -30,21 +30,12 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	~SceneManager();
-
-	void fixedUpdate();
-	void update();
+	std::string currentSceneName;
+	void fixedUpdate(sf::Event* evt);
 	void render(std::shared_ptr<sf::RenderWindow> window);
-	void setScene(std::string targetSceneName);
-	std::string currentScene;
-	std::shared_ptr<sf::RenderWindow> window;
-	std::vector<std::shared_ptr<Scene>> scenes;
-	void initialise(std::shared_ptr<sf::RenderWindow> w);
-	//std::shared_ptr<GameData> m_data;
+	void setScene(std::string name);
+	std::vector<Scene*> scenes;
+	void initialise();
 
-private:
-	int globalVolumeSFX;
-	int globalVolumeMusic;
-	std::shared_ptr<MenuScene> menuScene;
-	std::shared_ptr<sf::Shader> constantShader;
 };
 #endif;

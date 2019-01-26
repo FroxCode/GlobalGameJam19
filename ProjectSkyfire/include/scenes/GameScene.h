@@ -20,9 +20,10 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	void initialise();
-	void update();
-	void render(std::shared_ptr<sf::RenderWindow> &window, std::shared_ptr<sf::Shader> shaders = nullptr);
+	GameScene(std::string name) : Scene(name) {}
+	void initialise() {}
+	void update(sf::Event* e) {}
+	void render(std::shared_ptr<sf::RenderWindow> &window) {}
 
 };
 #endif;

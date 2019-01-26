@@ -36,14 +36,14 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Pure virtual destructor
 	////////////////////////////////////////////////////////////
-	virtual ~Scene() = 0;
+	//virtual ~Scene() = 0;
 
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	virtual void initialise() = 0;
-	virtual void update() = 0;
-	virtual void render(std::shared_ptr<sf::RenderWindow> &window, std::shared_ptr<sf::Shader> shaders = nullptr) = 0;
+	void initialise() {};
+	void update(sf::Event* e) {};
+	void render(std::shared_ptr<sf::RenderWindow> &window) {}
 	
 	////////////////////////////////////////////////////////////
 	/// Getters and Setters
