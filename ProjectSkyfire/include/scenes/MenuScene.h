@@ -16,6 +16,7 @@
 #include "systems/ControlSystem.h"
 #include "systems/CollisionSystem.h"
 #include "components/BoxColliderComponent.h"
+#include "systems/PhysicsSystem.h"
 
 
 class MenuScene : public Scene
@@ -34,6 +35,7 @@ public:
 	CollisionSystem boinker;
 	Entity backgroundImage;
 	RenderSystem lilRendy;
+	PhysicsSystem weewaw;
 	
 	const std::string backgroundImagePath = "assets/sprites/menuBackground.png";
 	const std::string playButtonImagePath = "assets/sprites/playButton.png";

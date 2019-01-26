@@ -24,6 +24,5 @@ class RenderSystem : public System
 {
 public:
 	void update(std::shared_ptr<sf::RenderWindow> w);
-
 };
 #endif;

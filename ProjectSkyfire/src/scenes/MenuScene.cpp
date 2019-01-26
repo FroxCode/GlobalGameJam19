@@ -30,10 +30,13 @@ void MenuScene::initialise(std::shared_ptr<sf::RenderWindow> window)
 	lilRendy.addEntity(&playButton);
 
 	boinker.addEntity(&playButton);
+
+	weewaw.addEntity(&playButton);
 }
 void MenuScene::update(sf::Event* e)
 {
 	boinker.update();
+	weewaw.update();
 }
 void MenuScene::render(std::shared_ptr<sf::RenderWindow> &window)
 {

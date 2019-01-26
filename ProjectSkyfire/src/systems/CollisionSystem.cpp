@@ -13,7 +13,6 @@ void CollisionSystem::update()
 				{
 					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 					{
-						std::cout << sf::Mouse::getPosition((*m_window)).x + ", " + sf::Mouse::getPosition((*m_window)).y << std::endl;
 						playButtonPressed = static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(
 							sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,
 								sf::Mouse::getPosition((*m_window)).y));

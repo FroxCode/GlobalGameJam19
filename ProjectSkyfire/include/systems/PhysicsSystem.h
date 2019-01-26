@@ -24,6 +24,7 @@ class PhysicsSystem : public System
 {
 public:
 	void update();
+	bool swapButtonScale = false;
 
 };
 #endif;
