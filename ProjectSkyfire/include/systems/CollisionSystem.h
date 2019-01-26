@@ -24,15 +24,22 @@
 class CollisionSystem : public System
 {
 public:
-	void update();
+	void addWindow(std::shared_ptr<sf::RenderWindow> window) { m_window = window; }
 
 	bool checkCollision(sf::Vector2f &point, sf::FloatRect &box);
+	bool checkCollision(sf::Vector2i &point, sf::FloatRect &box);
+
 	bool checkCollision(sf::Vector2f &point, sf::IntRect &box);
 	bool checkCollision(sf::IntRect &a, sf::IntRect &b);
 
 	float getHorizontalIntersectionDepth(sf::FloatRect &a, sf::FloatRect &b);
 	float getVerticalIntersectionDepth(sf::FloatRect &a, sf::FloatRect &b);
 	sf::FloatRect asFloatRect(sf::IntRect &rect);
+
+	std::shared_ptr<sf::RenderWindow> m_window;
+	void update();
+
+	bool playButtonPressed = false;
 
 };
 #endif;

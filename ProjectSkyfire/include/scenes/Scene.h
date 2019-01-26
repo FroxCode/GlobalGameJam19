@@ -13,11 +13,21 @@
 ////////////////////////////////////////////////////////////
 ///C++
 #include <memory>
+#include <iostream>
 
 ///SFML
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/OpenGL.hpp>
+
+//SKYFIRE
+#include "Entity.h"
+#include "components/TransformComponent.h"
+#include "components/SpriteComponent.h"
+#include "systems/ControlSystem.h"
+#include "systems/RenderSystem.h"
+
+
 
 ///ABSTRACT CLASS
 class Scene
@@ -41,8 +51,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	void initialise() {};
-	void update(sf::Event* e) {};
+	void initialise() {}
+	void update(sf::Event* e) {}
 	void render(std::shared_ptr<sf::RenderWindow> &window) {}
 	
 	////////////////////////////////////////////////////////////

@@ -35,8 +35,8 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Getters/Setters
 	////////////////////////////////////////////////////////////
-	sf::FloatRect getBox() { return m_box; }
-	void setBox(sf::FloatRect box) { m_box = box; }
+	sf::FloatRect* getBox() { return m_box; }
+	void setBox(sf::FloatRect* box) { m_box = box; }
 
 	bool isColliding() { return m_collision; }
 
@@ -44,7 +44,7 @@ private:
 	////////////////////////////////////////////////////////////
 	/// Member Variables
 	////////////////////////////////////////////////////////////
-	sf::FloatRect m_box;
+	sf::FloatRect* m_box;
 	bool m_collision;
 
 };

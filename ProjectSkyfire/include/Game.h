@@ -64,7 +64,6 @@ private:
 	sf::Vector2i const lowRes = sf::Vector2i(640, 360);
 	sf::Vector2i const medRes = sf::Vector2i(1280, 720);
 	sf::Vector2i const highRes = sf::Vector2i(1920, 1080);
-	sf::Vector2i const fourKay = sf::Vector2i(3840, 2160);
 	sf::Vector2i defaultResolution = highRes;
 
 	sf::Clock FPS_clock;

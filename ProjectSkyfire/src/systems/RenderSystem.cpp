@@ -2,7 +2,7 @@
 
 void RenderSystem::update(std::shared_ptr<sf::RenderWindow> w)
 {
-	std::cout << "RenderSystem update..." << std::endl;
+	///std::cout << "RenderSystem update..." << std::endl;
 	for (std::vector<Entity*>::iterator i = m_entities.begin(), e = m_entities.end(); i != e; i++)
 	{
 		for (int j = 0; j < (*i)->getComponents().size(); j++)

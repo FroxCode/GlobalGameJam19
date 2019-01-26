@@ -2,16 +2,22 @@
 
 void CollisionSystem::update()
 {
-	std::cout << "CollisionSystem update..." << std::endl;
+	///std::cout << "CollisionSystem update..." << std::endl;
 	for (std::vector<Entity*>::iterator i = m_entities.begin(), e = m_entities.end(); i != e; i++)
 	{
 		for (int j = 0; j < (*i)->getComponents().size(); j++)
 		{
 			if ((*i)->getComponents().at(j)->getName() == "BoxColliderComponent")
 			{
-				if ((*i)->getId() == "Example")
+				if ((*i)->getId() == "playButton")
 				{
-					//perform on example entitys BoxColliderComponent
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+					{
+						std::cout << sf::Mouse::getPosition((*m_window)).x + ", " + sf::Mouse::getPosition((*m_window)).y << std::endl;
+						playButtonPressed = static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(
+							sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,
+								sf::Mouse::getPosition((*m_window)).y));
+					}
 				}
 			}
 			else if ((*i)->getComponents().at(j)->getName() == "CircleColliderComponent")
@@ -24,6 +30,10 @@ void CollisionSystem::update()
 bool CollisionSystem::checkCollision(sf::Vector2f &point, sf::FloatRect &box)
 {
 	return box.contains(point);
+}
+bool CollisionSystem::checkCollision(sf::Vector2i &point, sf::FloatRect &box)
+{
+	return box.contains((sf::Vector2f(point)));
 }
 bool CollisionSystem::checkCollision(sf::Vector2f &point, sf::IntRect &box)
 {
