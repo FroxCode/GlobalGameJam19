@@ -7,7 +7,6 @@ class AgeComponent : public Component
 {
 public:
 
-	AgeComponent() : Component("AgeComponent") {}
 	////////////////////////////////////////////////////////////
 	/// Overloaded constructor
 	////////////////////////////////////////////////////////////
@@ -22,7 +21,7 @@ public:
 	/// Getters/Setters
 	////////////////////////////////////////////////////////////
 	int getAge() { return m_age; }
-	void setBox(int age) { m_age = age; }
+	void setAge(int age) { m_age = age; }
 
 
 private:
