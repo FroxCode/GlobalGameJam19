@@ -40,6 +40,7 @@ public:
 	void update();
 
 	bool playButtonPressed = false;
+	int buttonPressed = -1;
 
 };
 #endif;

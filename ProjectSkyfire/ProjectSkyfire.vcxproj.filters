@@ -60,6 +60,9 @@
     <ClCompile Include="src\systems\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\components\BoxColliderComponent.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="include\components\ValuesComponent.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dialog.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -148,4 +148,6 @@ public:
 	const static std::string courtneyOverallResponsesBad;
 	const static std::string courtneyOverallResponsesNeutral;
 	const static std::string courtneyOverallResponsesGood;
+
+
 };

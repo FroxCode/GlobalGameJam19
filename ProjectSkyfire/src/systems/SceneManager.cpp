@@ -10,7 +10,7 @@ SceneManager::~SceneManager()
 {
 
 }
-void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> window)
+void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> &window)
 {
 	w = window;
 	menuScene = new MenuScene("Menu");
@@ -34,6 +34,9 @@ void SceneManager::fixedUpdate(sf::Event* evt)
 				{
 					setScene("Game");
 				}
+
+				std::cout << ".";
+				break;
 			}
 		}
 	}
@@ -44,11 +47,12 @@ void SceneManager::fixedUpdate(sf::Event* evt)
 			{
 				static_cast<GameScene*>(*i)->update(evt);
 				std::cout << "Updating game scene" << std::endl;
+				break;
 			}
 		}
 	}
 }
-void SceneManager::render(std::shared_ptr<sf::RenderWindow> window)
+void SceneManager::render(std::shared_ptr<sf::RenderWindow> &window)
 {
 	if (currentSceneName == "Menu")
 	{
@@ -80,6 +84,6 @@ void SceneManager::setScene(std::string targetSceneName)
 	else if (currentSceneName == "Game")
 	{
 		gameScene = new GameScene("Game");
-		gameScene->initialise();
+		gameScene->initialise(w);
 	}
 }

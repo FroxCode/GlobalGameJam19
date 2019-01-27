@@ -22,7 +22,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	GameScene(std::string name) : Scene(name), 
+	GameScene(std::string name) : Scene(name), diallyBoi("diallyBoi"),
 	buttonOne("buttonOne"), buttonTwo("buttonTwo"), buttonThree("buttonThree"),
 		dateOne("dateOne"),	dateTwo("dateTwo"),	dateThree("dateThree"){}
 	void initialise(std::shared_ptr<sf::RenderWindow> &window);
@@ -32,7 +32,7 @@ public:
 	enum GameStates { Intro, ChooseStage, InStage, HouseChoice, End }; 
 	enum Stages { StageOne, StageTwo, StageThree };
 	enum DateNumber { First, Second, Third };
-	enum Dialogues { Intro, IntroResponse, ThisOrThat, ThisOrThatResponse,
+	enum Dialogues { DateIntro, IntroResponse, ThisOrThat, ThisOrThatResponse,
 		GettingToKnowYou, GettingToKnowYouResponse, OverallResponse };
 	enum ResponseTypes { Bad, Neutral, Good };
 
@@ -42,11 +42,11 @@ public:
 	Dialogues dialogue;
 	ResponseTypes responseType;
 
-	void introUpdate(sf::Event* e);
-	void choiceUpdate(sf::Event* e);
-	void stageUpdate(sf::Event* e);
-	void houseChoiceUpdate(sf::Event* e);
-	void endGameUpdate(sf::Event* e);
+	void introUpdate();
+	void choiceUpdate();
+	void stageUpdate();
+	void houseChoiceUpdate();
+	void endGameUpdate();
 
 	bool goToMainMenu = false;
 
@@ -62,9 +62,8 @@ public:
 	void houseChoiceInit();
 	void endGameInit();
 
-	Entity createButton(GameStates gameState);
 	std::string getButtonText(GameStates gameState, int button);
-	void resetButtons(int num);
+	void resetButtons(int num = 2);
 
 	void factoryRecreateButtons(int buttons = 2);
 	std::string getCharacterAnswers(int button, GameScene::Dialogues questionPhase);
@@ -77,17 +76,21 @@ public:
 	sf::Vector2f rightPos = sf::Vector2f(1310, 800);
 
 	sf::Vector2f buttonScale = sf::Vector2f(0.75f, 0.5f);
-	std::string getConversationButtonText(int button, GameScene::DateNumber dateNumber);
+	std::string getConversationButtonText(int button , GameScene::DateNumber dateNumber);
 
-
+	bool click = false;
 	int responseStrength;
 //////////////////////////////////SYSTEMS//////////////////////////////
-	CollisionSystem boinker;
+	CollisionSystem boinkor;
+	RenderSystem lilRendo;
+
 
 //////////////////////////////////ENTITIES/////////////////////////////
 	Entity buttonOne;
 	Entity buttonTwo;
 	Entity buttonThree;
+
+	Entity diallyBoi; 
 
 	Entity* currentDate;
 	Entity dateOne;

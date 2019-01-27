@@ -1,14 +1,25 @@
 #include "scenes/GameScene.h"
-
+#include "Dialog.h"
 void GameScene::initialise(std::shared_ptr<sf::RenderWindow> &window) 
 {
+
+	diallyBoi.addComponent(new TextComponent());
+	diallyBoi.addComponent(new SpriteComponent(dialBoxName));
+	diallyBoi.addComponent(new TransformComponent());
+
+
+	static_cast<TextComponent*>(diallyBoi.getComponents().at(0))->getText()->setString("Hello");	
+	static_cast<TransformComponent*>(diallyBoi.getComponents().at(0))->setPosition(sf::Vector2f(20,20));
+
+	lilRendo.addEntity(&diallyBoi);
+	boinkor.addEntity(&diallyBoi);
 	switch (gameState)
 	{
 	case GameScene::Intro:
 		gameState = GameStates::Intro;
 		stage = Stages::StageOne;
 		dateNumber = DateNumber::First;
-		dialogue = Dialogues::Intro;
+		dialogue = Dialogues::DateIntro;
 		responseType = ResponseTypes::Neutral;
 		//load intro
 		introInit();
@@ -44,10 +55,11 @@ void GameScene::initialise(std::shared_ptr<sf::RenderWindow> &window)
 }
 void GameScene::update(sf::Event* e)
 {
+	boinkor.update();
 	switch (gameState)
 	{
 	case GameScene::Intro:
-		introUpdate(e); //swaps gameState to ChooseStage + Stage at end
+		introUpdate();
 		//show dialogue of what happens in game
 		break;
 	case GameScene::ChooseStage:
@@ -85,78 +97,60 @@ void GameScene::update(sf::Event* e)
 }
 void GameScene::render(std::shared_ptr<sf::RenderWindow> &window)
 {
+	lilRendo.update(window);
+}
 
-	switch (gameState)
+void GameScene::introUpdate()
+{
+	switch (boinkor.buttonPressed)
 	{
-	case GameScene::Intro:
-		introRender(window); //swaps gameState to ChooseStage + Stage at end
-		//show dialogue of what happens in game
+	case 0:
+		gameState = GameStates::ChooseStage;
+		stage = Stages::StageOne;
 		break;
-	case GameScene::ChooseStage:
-		choiceRender(window);
-		//if (method returning which number 0/1/2 was clicked)
-		//{
-			//switch (that method return int)
-			//{
-			//case GameScene::StageOne:
-				//gameState = GameScene::InStage;
-				//stage = GameScene::StageOne;
-			//	break;
-			//case GameScene::StageTwo:
-			//	break;
-			//case GameScene::StageThree:
-			//	break;
-			//default:
-			//	break;
-			//}
-		//}
+	case 1:
+		gameState = GameStates::ChooseStage;
+		stage = Stages::StageTwo;
 		break;
-	case GameScene::InStage:
-		stageRender(window); //Render Stage 
-		break;
-	case GameScene::HouseChoice:
-		houseChoiceRender(window);
-		break;
-	case GameScene::End:
-		endGameRender(window);
+	case 2:
+		gameState = GameStates::ChooseStage;
+		stage = Stages::StageThree;
 		break;
 	default:
-		goToMainMenu = true;
+		//do nothing
 		break;
 	}
-}
-
-void GameScene::introUpdate(sf::Event* e)
-{
-	boinker.update();
-
-	//display intro dialogue using systems (make them)
-	//checkcollision on 3 buttons jhiudwused globally in scene everychoice (less duplication)
-	//if yes on one, get that number 0 1 2
-}
-void GameScene::introRender(std::shared_ptr<sf::RenderWindow> window)
-{
-	lilRendy.update(window);
 	//display intro dialogue using systems (make them)
 	//checkcollision on 3 buttons jhiudwused globally in scene everychoice (less duplication)
 	//if yes on one, get that number 0 1 2
 }
 void GameScene::choiceUpdate()
 {
-	if (dummy.getId()=="") {}
+	switch (boinkor.buttonPressed)
+	{
+	case 0:
+
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	default:
+		break;
+	}
 }
 void GameScene::stageUpdate()
 {
 	switch (stage)
 	{
 	case GameScene::StageOne:
-		houseChoiceUpdate();
+		//houseChoiceUpdate();
 		break;
 	case GameScene::StageTwo:
-		houseChoiceUpdate();
+		//houseChoiceUpdate();
 		break;
 	case GameScene::StageThree:
-		houseChoiceUpdate();
+		//houseChoiceUpdate();
 		break;
 	default:
 		break;
@@ -174,14 +168,10 @@ void GameScene::introInit()
 {
 	factoryRecreateButtons();
 }
-Entity createButton(GameScene::GameStates gameState)
-{
 
-}
-
-void GameScene::factoryRecreateButtons(int buttons = 2)//GameStates gameState, int buttons = 2)
+void GameScene::factoryRecreateButtons(int buttons)//GameStates gameState, int buttons = 2)
 {
-	boinker = CollisionSystem();
+	boinkor = CollisionSystem();
 
 	for(int i = 0; i < buttons; i++)
 	{
@@ -192,24 +182,24 @@ void GameScene::factoryRecreateButtons(int buttons = 2)//GameStates gameState, i
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinker.addEntity(&buttonOne);
+				boinkor.addEntity(&buttonOne);
 				break;
 			case 1:
 				resetButtons();
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinker.addEntity(&buttonOne);
-				boinker.addEntity(&buttonTwo);
+				boinkor.addEntity(&buttonOne);
+				boinkor.addEntity(&buttonTwo);
 				break;
 			case 2:
 				resetButtons();
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinker.addEntity(&buttonOne);
-				boinker.addEntity(&buttonTwo);
-				boinker.addEntity(&buttonThree);
+				boinkor.addEntity(&buttonOne);
+				boinkor.addEntity(&buttonTwo);
+				boinkor.addEntity(&buttonThree);
 				break;
 			default:
 				break;
@@ -222,16 +212,11 @@ std::string GameScene::getButtonText(GameStates gameState, int button)
 	switch (gameState)
 	{
 	case GameScene::Intro:
-		switch (button)
-		{
-		case 0:
-			return ""; //intro string option to go to choose stage
-			break;
-		default:
-			break;
-		}
+		//"Hey there"
+		return "Continue.."; //intro string option to go to choose stage
 		break;
 	case GameScene::ChooseStage:
+		//"Choose your neighbourhood"
 		switch (button)
 		{
 		case 0:
@@ -251,11 +236,14 @@ std::string GameScene::getButtonText(GameStates gameState, int button)
 		switch (dateNumber)
 		{
 		case GameScene::First:
-			
+			//dialog::
+			getConversationButtonText(button, DateNumber::First);
 			break;
 		case GameScene::Second:
+			getConversationButtonText(button, DateNumber::Second);
 			break;
 		case GameScene::Third:
+			getConversationButtonText(button, DateNumber::Third);
 			break;
 		default:
 			break;
@@ -273,8 +261,8 @@ std::string GameScene::getConversationButtonText(int button, GameScene::DateNumb
 {
 	switch (dialogue)
 	{
-	case GameScene::Dialogues::Intro:
-		return getCharacterAnswers(button, GameScene::Dialogues::Intro);
+	case GameScene::DateIntro:
+		return getCharacterAnswers(button, GameScene::DateIntro);
 		break;
 	case GameScene::IntroResponse:
 		return getCharacterAnswers(0, GameScene::Dialogues::IntroResponse);
@@ -298,7 +286,7 @@ std::string GameScene::getConversationButtonText(int button, GameScene::DateNumb
 		break;
 	}
 }
-void GameScene::resetButtons(int num = 2)
+void GameScene::resetButtons(int num)
 {
 	switch (num)
 	{
@@ -332,14 +320,48 @@ std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues ques
 	//set date to get answers stored for them
 	switch (dateNumber)
 	{
+
 	case GameScene::First:
-		currentDate = dateOne;
+		switch (questionPhase)
+		{
+		case GameScene::DateIntro:
+			static_cast<TextComponent*>(diallyBoi.getComponents().at(0))->getText()->setString(
+				Dialog::eliseIntroQuestion
+			);
+			switch (button)
+			{
+			case 0:
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			default:
+				break;
+			}
+			break;
+		case GameScene::IntroResponse:
+			break;
+		case GameScene::ThisOrThat:
+			break;
+		case GameScene::ThisOrThatResponse:
+			break;
+		case GameScene::GettingToKnowYou:
+			break;
+		case GameScene::GettingToKnowYouResponse:
+			break;
+		case GameScene::OverallResponse:
+			break;
+		default:
+			break;
+		}
+		currentDate = &dateOne;
 		break;
 	case GameScene::Second:
-		currentDate = dateTwo;
+		currentDate = &dateTwo;
 		break;
 	case GameScene::Third:
-		currentDate = dateThree;
+		currentDate = &dateThree;
 		break;
 	default:
 		break;
@@ -351,14 +373,14 @@ std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues ques
 		{
 		case 0:
 			responseStrength--;
-			return; //answer 1
+			return""; //answer 1
 			break;
 		case 1:
-			return; //answer 2
+			return""; //answer 2
 			break;
 		case 2:
 			responseStrength++;
-			return; //answer 3
+			return""; //answer 3
 			break;
 		default:
 			break;
@@ -371,13 +393,13 @@ std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues ques
 		switch (button)
 		{
 		case 0:
-			return; //answer 1
+			return""; //answer 1
 			break;
 		case 1:
-			return; //answer 2
+			return""; //answer 2
 			break;
 		case 2:
-			return; //answer 3
+			return""; //answer 3
 			break;
 		default:
 			break;
@@ -391,13 +413,13 @@ std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues ques
 		switch (button)
 		{
 		case 0:
-			return; //answer 1
+			return""; //answer 1
 			break;
 		case 1:
-			return; //answer 2
+			return""; //answer 2
 			break;
 		case 2:
-			return; //answer 3
+			return""; //answer 3
 			break;
 		default:
 			break;
@@ -410,13 +432,13 @@ std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues ques
 		switch (responseStrength)
 		{
 		case 0:
-			return; //bad
+			return""; //bad
 			break;
 		case 1:
-			return; //neutral
+			return""; //neutral
 			break;
 		case 2:
-			return; //good
+			return""; //good
 			break;
 		default:
 			break;

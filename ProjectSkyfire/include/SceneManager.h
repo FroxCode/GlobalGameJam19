@@ -32,10 +32,10 @@ public:
 	~SceneManager();
 	std::string currentSceneName;
 	void fixedUpdate(sf::Event* evt);
-	void render(std::shared_ptr<sf::RenderWindow> window);
+	void render(std::shared_ptr<sf::RenderWindow> &window);
 	void setScene(std::string name);
 	std::vector<Scene*> scenes;
-	void initialise(std::shared_ptr<sf::RenderWindow> window);
+	void initialise(std::shared_ptr<sf::RenderWindow> &window);
 
 	std::shared_ptr<sf::RenderWindow> w;
 	GameScene* gameScene;
