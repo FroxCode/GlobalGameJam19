@@ -23,8 +23,8 @@ public:
 	/// Member functions
 	////////////////////////////////////////////////////////////
 	GameScene(std::string name) : Scene(name), 
-	buttonOne("buttonOne"), buttonTwo("buttonTwo"), buttonThree("buttonThree"), {}
-
+	buttonOne("buttonOne"), buttonTwo("buttonTwo"), buttonThree("buttonThree"),
+		dateOne("dateOne"),	dateTwo("dateTwo"),	dateThree("dateThree"){}
 	void initialise(std::shared_ptr<sf::RenderWindow> &window);
 	void update(sf::Event* e);
 	void render(std::shared_ptr<sf::RenderWindow> &window);
@@ -42,15 +42,15 @@ public:
 	Dialogues dialogue;
 	ResponseTypes responseType;
 
-	void introUpdate();
-	void choiceUpdate();
-	void stageUpdate();
-	void houseChoiceUpdate();
-	void endGameUpdate();
+	void introUpdate(sf::Event* e);
+	void choiceUpdate(sf::Event* e);
+	void stageUpdate(sf::Event* e);
+	void houseChoiceUpdate(sf::Event* e);
+	void endGameUpdate(sf::Event* e);
 
 	bool goToMainMenu = false;
 
-	void introRender( std::shared_ptr<sf::RenderWindow> &window);
+	void introRender(std::shared_ptr<sf::RenderWindow> window);
 	void choiceRender(std::shared_ptr<sf::RenderWindow> &window);
 	void stageRender(std::shared_ptr<sf::RenderWindow> &window);
 	void houseChoiceRender(std::shared_ptr<sf::RenderWindow> &window);
@@ -77,6 +77,8 @@ public:
 	sf::Vector2f rightPos = sf::Vector2f(1310, 800);
 
 	sf::Vector2f buttonScale = sf::Vector2f(0.75f, 0.5f);
+	std::string getConversationButtonText(int button, GameScene::DateNumber dateNumber);
+
 
 	int responseStrength;
 //////////////////////////////////SYSTEMS//////////////////////////////
@@ -86,5 +88,10 @@ public:
 	Entity buttonOne;
 	Entity buttonTwo;
 	Entity buttonThree;
+
+	Entity* currentDate;
+	Entity dateOne;
+	Entity dateTwo;
+	Entity dateThree;
 };
 #endif;

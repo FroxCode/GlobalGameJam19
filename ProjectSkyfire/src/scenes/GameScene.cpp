@@ -128,7 +128,7 @@ void GameScene::render(std::shared_ptr<sf::RenderWindow> &window)
 
 void GameScene::introUpdate(sf::Event* e)
 {
-	boinker.update(e);
+	boinker.update();
 
 	//display intro dialogue using systems (make them)
 	//checkcollision on 3 buttons jhiudwused globally in scene everychoice (less duplication)
@@ -136,7 +136,7 @@ void GameScene::introUpdate(sf::Event* e)
 }
 void GameScene::introRender(std::shared_ptr<sf::RenderWindow> window)
 {
-	boinker.render(window);
+	lilRendy.update(window);
 	//display intro dialogue using systems (make them)
 	//checkcollision on 3 buttons jhiudwused globally in scene everychoice (less duplication)
 	//if yes on one, get that number 0 1 2
@@ -251,70 +251,7 @@ std::string GameScene::getButtonText(GameStates gameState, int button)
 		switch (dateNumber)
 		{
 		case GameScene::First:
-			switch (dialogue)
-			{
-			case GameScene::Dialogues::Intro:
-				switch (button)
-				{
-				case 0:
-					return getCharacterAnswers(0, GameScene::Dialogues::Intro);;
-					break;
-				case 1:
-					return getCharacterAnswers(1, GameScene::Dialogues::Intro);;
-					break;
-				case 2:
-					return getCharacterAnswers(2, GameScene::Dialogues::Intro);;
-					break;
-				default:
-					break;
-				}
-				break;
-			case GameScene::IntroResponse:
-			case 0:
-				return getCharacterAnswers(0, GameScene::Dialogues::IntroResponse); 
-				break;
-				break;
-			case GameScene::ThisOrThat:
-				switch (button)
-				{
-				case 0:
-					return getCharacterAnswers(0, GameScene::ThisOrThat);
-					break;
-				case 1:
-					return getCharacterAnswers(1, GameScene::ThisOrThat);
-					break;
-				case 2:
-					return getCharacterAnswers(2, GameScene::ThisOrThat);
-					break;
-				default:
-					break;
-				}
-				break;
-			case GameScene::ThisOrThatResponse:
-				break;
-			case GameScene::GettingToKnowYou:
-				switch (button)
-				{
-				case 0:
-					return "Stage 1";
-					break;
-				case 1:
-					return "Stage 2";
-					break;
-				case 2:
-					return "Stage 3";
-					break;
-				default:
-					break;
-				}
-				break;
-			case GameScene::GettingToKnowYouResponse:
-				break;
-			case GameScene::OverallResponse:
-				break;
-			default:
-				break;
-			}
+			
 			break;
 		case GameScene::Second:
 			break;
@@ -332,7 +269,35 @@ std::string GameScene::getButtonText(GameStates gameState, int button)
 		break;
 	}
 }
-
+std::string GameScene::getConversationButtonText(int button, GameScene::DateNumber dateNumber)
+{
+	switch (dialogue)
+	{
+	case GameScene::Dialogues::Intro:
+		return getCharacterAnswers(button, GameScene::Dialogues::Intro);
+		break;
+	case GameScene::IntroResponse:
+		return getCharacterAnswers(0, GameScene::Dialogues::IntroResponse);
+		break;
+	case GameScene::ThisOrThat:
+		return getCharacterAnswers(button, GameScene::ThisOrThat);
+		break;
+	case GameScene::ThisOrThatResponse:
+		return getCharacterAnswers(0, GameScene::Dialogues::ThisOrThatResponse);
+		break;
+	case GameScene::GettingToKnowYou:
+		return getCharacterAnswers(button, GameScene::GettingToKnowYou);
+		break;
+	case GameScene::GettingToKnowYouResponse:
+		return getCharacterAnswers(0, GameScene::Dialogues::GettingToKnowYouResponse);
+		break;
+	case GameScene::OverallResponse:
+		return getCharacterAnswers(0, GameScene::Dialogues::OverallResponse);
+		break;
+	default:
+		break;
+	}
+}
 void GameScene::resetButtons(int num = 2)
 {
 	switch (num)
@@ -364,6 +329,21 @@ void GameScene::resetButtons(int num = 2)
 }
 std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues questionPhase)
 {
+	//set date to get answers stored for them
+	switch (dateNumber)
+	{
+	case GameScene::First:
+		currentDate = dateOne;
+		break;
+	case GameScene::Second:
+		currentDate = dateTwo;
+		break;
+	case GameScene::Third:
+		currentDate = dateThree;
+		break;
+	default:
+		break;
+	}
 	switch (questionPhase)
 	{
 	case GameScene::Intro:
