@@ -52,7 +52,31 @@ public:
 	void choiceRender();
 	void stageRender();
 	void houseChoiceRender();
+	void endGameUpdate();
 
-	Entity dummy;
+	void introInit();
+	void choiceInit();
+	void stageInit();
+	void houseChoiceInit();
+	void endGameInit();
+
+	void factoryRecreateButtons()
+
+	std::string fontName = "assets/fonts/default.ttf";
+	std::string dialBoxName = "assets/sprites/speechBubble.png"
+
+	sf::Vector2f leftPos = sf::Vector2f(110, 800);
+	sf::Vector2f midPos = sf::Vector2f(710, 800);
+	sf::Vector2f rightPos = sf::Vector2f(1310, 800);
+
+	sf::Vector2f buttonScale = sf::Vector2f(0.75f, 0.5f);
+
+//////////////////////////////////SYSTEMS//////////////////////////////
+	CollisionSystem boinker;
+
+//////////////////////////////////ENTITIES/////////////////////////////
+	Entity buttonOne;
+	Entity buttonTwo;
+	Entity buttonThree;
 };
 #endif;
