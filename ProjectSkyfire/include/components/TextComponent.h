@@ -66,6 +66,7 @@ public:
 		else
 		{
 			m_text->setFont(*m_font);
+			
 		}
 	}
 private:

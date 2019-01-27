@@ -7,12 +7,41 @@ void GameScene::initialise(std::shared_ptr<sf::RenderWindow> &window)
 	diallyBoi.addComponent(new SpriteComponent(dialBoxName));
 	diallyBoi.addComponent(new TransformComponent());
 
+	realEstateAgent.addComponent(new SpriteComponent(dealerImagePath));
+	realEstateAgent.addComponent(new TransformComponent(sf::Vector2f(1280, 120)));
+
+	backgroundImage.addComponent(new SpriteComponent(backgroundImagePath));
+	backgroundImage.addComponent(new TransformComponent());
+
+
 
 	static_cast<TextComponent*>(diallyBoi.getComponents().at(0))->getText()->setString("Hello");	
-	static_cast<TransformComponent*>(diallyBoi.getComponents().at(0))->setPosition(sf::Vector2f(20,20));
+	static_cast<TransformComponent*>(diallyBoi.getComponents().at(2))->setPosition(sf::Vector2f(20,20));
+	static_cast<SpriteComponent*>(diallyBoi.getComponents().at(1))->getSprite()->setColor(sf::Color(
+		static_cast<SpriteComponent*>(diallyBoi.getComponents().at(1))->getSprite()->getColor().r,
+		static_cast<SpriteComponent*>(diallyBoi.getComponents().at(1))->getSprite()->getColor().g,
+		static_cast<SpriteComponent*>(diallyBoi.getComponents().at(1))->getSprite()->getColor().b,
+		150)
+	);
 
+
+	lilRendo.addEntity(&backgroundImage);
+
+	lilRendo.addEntity(&realEstateAgent);
 	lilRendo.addEntity(&diallyBoi);
+
 	boinkor.addEntity(&diallyBoi);
+
+	lilRendo.addEntity(&buttonOne);
+	lilRendo.addEntity(&buttonTwo);
+	lilRendo.addEntity(&buttonThree);
+
+	boinkor.addEntity(&buttonOne);
+	boinkor.addEntity(&buttonTwo);
+	boinkor.addEntity(&buttonThree);
+
+	resetButtons();
+
 	switch (gameState)
 	{
 	case GameScene::Intro:
@@ -171,8 +200,6 @@ void GameScene::introInit()
 
 void GameScene::factoryRecreateButtons(int buttons)//GameStates gameState, int buttons = 2)
 {
-	boinkor = CollisionSystem();
-
 	for(int i = 0; i < buttons; i++)
 	{
 		switch (i)
@@ -182,24 +209,18 @@ void GameScene::factoryRecreateButtons(int buttons)//GameStates gameState, int b
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinkor.addEntity(&buttonOne);
 				break;
 			case 1:
 				resetButtons();
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinkor.addEntity(&buttonOne);
-				boinkor.addEntity(&buttonTwo);
 				break;
 			case 2:
 				resetButtons();
 				static_cast<TextComponent*>(buttonOne.getComponents().at(1))->getText()->setString(
 					getButtonText(gameState, i)
 				);
-				boinkor.addEntity(&buttonOne);
-				boinkor.addEntity(&buttonTwo);
-				boinkor.addEntity(&buttonThree);
 				break;
 			default:
 				break;
@@ -287,33 +308,50 @@ std::string GameScene::getConversationButtonText(int button, GameScene::DateNumb
 	}
 }
 void GameScene::resetButtons(int num)
-{
-	switch (num)
-	{
-		case 0:
-			buttonOne = Entity("buttonOne");
+{			buttonOne = Entity("buttonOne");
+
 			buttonOne.addComponent(new BoxColliderComponent());
 			buttonOne.addComponent(new TextComponent(fontName));
 			buttonOne.addComponent(new SpriteComponent(dialBoxName));
-			buttonOne.addComponent(new TransformComponent(midPos, 0.f, buttonScale));
-			break;
-		case 1:
+			buttonOne.addComponent(new TransformComponent(leftPos, 0.f, buttonScale));
+
+
+			static_cast<BoxColliderComponent*>(buttonOne.getComponents().at(0))->setBox(new sf::FloatRect(
+				static_cast<SpriteComponent*>(buttonOne.getComponents().at(2))->getSprite()->getGlobalBounds())
+			);
+
+			boinkor.getEntities().at(1) = &buttonOne;
+
+			lilRendo.getEntities().at(3) = &buttonOne;
+			
 			buttonTwo = Entity("buttonTwo");
+
 			buttonTwo.addComponent(new BoxColliderComponent());
 			buttonTwo.addComponent(new TextComponent(fontName));
 			buttonTwo.addComponent(new SpriteComponent(dialBoxName));
 			buttonTwo.addComponent(new TransformComponent(midPos, 0.f, buttonScale));
-			break;
-		case 2:
+			static_cast<BoxColliderComponent*>(buttonTwo.getComponents().at(0))->setBox(new sf::FloatRect(
+				static_cast<SpriteComponent*>(buttonTwo.getComponents().at(2))->getSprite()->getGlobalBounds())
+			);
+
+			lilRendo.getEntities().at(4) = &buttonTwo;
+			boinkor.getEntities().at(2) = &buttonOne;
+
+
 			buttonThree = Entity("buttonThree");
+
 			buttonThree.addComponent(new BoxColliderComponent());
 			buttonThree.addComponent(new TextComponent(fontName));
 			buttonThree.addComponent(new SpriteComponent(dialBoxName));
-			buttonThree.addComponent(new TransformComponent(midPos, 0.f, buttonScale));
-			break;	
-		default:
-			break;
-	}	
+			buttonThree.addComponent(new TransformComponent(rightPos, 0.f, buttonScale));
+			static_cast<BoxColliderComponent*>(buttonTwo.getComponents().at(0))->setBox(new sf::FloatRect(
+				static_cast<SpriteComponent*>(buttonTwo.getComponents().at(2))->getSprite()->getGlobalBounds())
+			);
+
+			lilRendo.getEntities().at(5) = &buttonThree;
+			boinkor.getEntities().at(3) = &buttonOne;
+
+			
 }
 std::string GameScene::getCharacterAnswers(int button, GameScene::Dialogues questionPhase)
 {

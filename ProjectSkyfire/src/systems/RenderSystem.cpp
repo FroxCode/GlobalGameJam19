@@ -13,11 +13,12 @@ void RenderSystem::update(std::shared_ptr<sf::RenderWindow> w)
 				{
 					if ((*i)->getComponents().at(k)->getName() == "TransformComponent")
 					{
+
 						static_cast<SpriteComponent*>((*i)->getComponents().at(j))->getSprite()->setPosition(
 							static_cast<TransformComponent*>((*i)->getComponents().at(k))->getPosition());
+
 						static_cast<SpriteComponent*>((*i)->getComponents().at(j))->getSprite()->setScale(
 							static_cast<TransformComponent*>((*i)->getComponents().at(k))->getScale());
-
 					}
 				}///update sprite position before draw
 				w->draw(*static_cast<SpriteComponent*>((*i)->getComponents().at(j))->getSprite());
