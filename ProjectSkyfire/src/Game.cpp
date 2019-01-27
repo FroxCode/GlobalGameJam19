@@ -63,7 +63,7 @@ void Game::run()
 }
 void Game::initialize()
 {
-	///std::cout << "initializing" << std::endl;
+	std::cout << "initializing" << std::endl;
 	sceneManager.initialise(window);
 }
 void Game::fixedUpdate(sf::Event* e)

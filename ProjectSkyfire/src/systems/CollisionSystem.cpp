@@ -18,6 +18,47 @@ void CollisionSystem::update()
 								sf::Mouse::getPosition((*m_window)).y));
 					}
 				}
+				else if ((*i)->getId() == "buttonOne")
+				{
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+					{
+
+						if (static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,sf::Mouse::getPosition((*m_window)).y)))
+						{
+							buttonPressed = 0;
+							std::cout << "DEBUG" << std::endl;
+
+						}
+					}
+				}
+				else if ((*i)->getId() == "buttonTwo")
+				{
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+					{
+						if (static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(
+							sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,
+								sf::Mouse::getPosition((*m_window)).y)))
+						{
+							buttonPressed = 1;
+							std::cout << "DEBUG" << std::endl;
+
+						}
+					}
+				}
+				else if ((*i)->getId() == "buttonThree")
+				{
+					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+					{
+						if (static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(
+							sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,
+								sf::Mouse::getPosition((*m_window)).y)))
+						{
+							buttonPressed = 2;
+							std::cout << "DEBUG" << std::endl;
+						}
+					}
+
+				}
 			}
 			else if ((*i)->getComponents().at(j)->getName() == "CircleColliderComponent")
 			{

@@ -36,12 +36,12 @@ public:
 	/// Default destructor
 	////////////////////////////////////////////////////////////
 	~Entity() {
-		std::cout << "Attempting to delete Entities components safely." << std::endl;
+		/*std::cout << "Attempting to delete Entities components safely." << std::endl;
 		for (int i = 0; i < m_components.size(); i++)
 		{
 			delete(m_components.at(i));
 		}
-		m_components.shrink_to_fit();
+		m_components.shrink_to_fit();*/
 	}
 
 	////////////////////////////////////////////////////////////

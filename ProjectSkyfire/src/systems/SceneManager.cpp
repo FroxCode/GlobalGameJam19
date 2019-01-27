@@ -10,17 +10,10 @@ SceneManager::~SceneManager()
 {
 
 }
-void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> window)
+void SceneManager::initialise(std::shared_ptr<sf::RenderWindow> &window)
 {
-	menuScene = new MenuScene("Menu");
-	menuScene->initialise(window);
-	scenes.push_back(menuScene);
-	currentSceneName = "Menu";
-	std::cout << "init scene manager" << std::endl;
-
-	gameScene = new GameScene("Game");
-	scenes.push_back(gameScene);
-	
+	w = window;
+	setScene("Menu");	
 }
 void SceneManager::fixedUpdate(sf::Event* evt)
 {//spaghetti
@@ -35,6 +28,9 @@ void SceneManager::fixedUpdate(sf::Event* evt)
 				{
 					setScene("Game");
 				}
+
+				std::cout << ".";
+				break;
 			}
 		}
 	}
@@ -44,12 +40,12 @@ void SceneManager::fixedUpdate(sf::Event* evt)
 			if ((*i)->getName() == "Game")
 			{
 				static_cast<GameScene*>(*i)->update(evt);
-				std::cout << "Updating game scene" << std::endl;
+				break;
 			}
 		}
 	}
 }
-void SceneManager::render(std::shared_ptr<sf::RenderWindow> window)
+void SceneManager::render(std::shared_ptr<sf::RenderWindow> &window)
 {
 	if (currentSceneName == "Menu")
 	{
@@ -72,5 +68,20 @@ void SceneManager::render(std::shared_ptr<sf::RenderWindow> window)
 }
 void SceneManager::setScene(std::string targetSceneName)
 {
+	scenes.clear();
 	currentSceneName = targetSceneName;
+	if (currentSceneName == "Menu")
+	{
+		menuScene = new MenuScene("Menu");
+		menuScene->initialise(w);
+
+		scenes.push_back(menuScene);
+	}
+	else if (currentSceneName == "Game")
+	{
+		gameScene = new GameScene("Game");
+		gameScene->initialise(w);
+
+		scenes.push_back(gameScene);
+	}
 }

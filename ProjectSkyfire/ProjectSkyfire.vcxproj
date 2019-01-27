@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Dialog.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\scenes\GameScene.cpp" />
@@ -150,18 +151,25 @@
     <ClCompile Include="src\systems\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\components\AgeComponent.h" />
+    <ClInclude Include="include\components\ArchitectureComponent.h" />
     <ClInclude Include="include\components\BoxColliderComponent.h" />
     <ClInclude Include="include\components\CircleColliderComponent.h" />
     <ClInclude Include="include\components\Component.h" />
+    <ClInclude Include="include\components\DialogueComponent.h" />
+    <ClInclude Include="include\components\FlawsComponent.h" />
     <ClInclude Include="include\components\GravityComponent.h" />
     <ClInclude Include="include\components\MusicComponent.h" />
+    <ClInclude Include="include\components\NameComponent.h" />
     <ClInclude Include="include\components\ParticlePoolComponent.h" />
     <ClInclude Include="include\components\PlayerComponent.h" />
     <ClInclude Include="include\components\SoundComponent.h" />
     <ClInclude Include="include\components\SpriteComponent.h" />
     <ClInclude Include="include\components\TextComponent.h" />
     <ClInclude Include="include\components\TransformComponent.h" />
+    <ClInclude Include="include\components\ValuesComponent.h" />
     <ClInclude Include="include\components\VelocityComponent.h" />
+    <ClInclude Include="include\Dialog.h" />
     <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\SceneManager.h" />

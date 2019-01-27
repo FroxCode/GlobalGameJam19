@@ -27,7 +27,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	void initialise(std::shared_ptr<sf::RenderWindow> window);
+	void initialise(std::shared_ptr<sf::RenderWindow> &window);
 	void update(sf::Event* e);
 	void render(std::shared_ptr<sf::RenderWindow> &window);
 
