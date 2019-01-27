@@ -22,7 +22,7 @@ public:
 	////////////////////////////////////////////////////////////
 	/// Member functions
 	////////////////////////////////////////////////////////////
-	GameScene(std::string name) : Scene(name), diallyBoi("diallyBoi"),
+	GameScene(std::string name) : Scene(name), diallyBoi("diallyBoi"), overlay("overlay"), remy("remy"),
 	buttonOne("buttonOne"), buttonTwo("buttonTwo"), buttonThree("buttonThree"), backgroundImage("backgroundImage"),
 		dateOne("dateOne"),	dateTwo("dateTwo"),	dateThree("dateThree"), realEstateAgent("realEstateAgent"){}
 	void initialise(std::shared_ptr<sf::RenderWindow> &window);
@@ -72,6 +72,8 @@ public:
 	std::string dealerImagePath = "assets/sprites/Characters/RealEstateAgent.png";
 	std::string dialBoxName = "assets/sprites/speechBubble.png";
 	std::string backgroundImagePath = "assets/sprites/Locations/EstateAgentsOffice.png";
+	std::string overlayPath = "assets/sprites/End Screens/End.png";
+	std::string remyPath = "assets/sprites/Characters/Houses/BeachHouse.png";
 
 
 	sf::Vector2f leftPos = sf::Vector2f(50, 850);
@@ -103,5 +105,7 @@ public:
 	Entity realEstateAgent;
 	Entity backgroundImage;
 
+	Entity overlay;
+	Entity remy;
 };
 #endif;

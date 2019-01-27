@@ -24,7 +24,9 @@ public:
 	/// Overloaded constructor
 	////////////////////////////////////////////////////////////
 	BoxColliderComponent() : Component("BoxColliderComponent"),
-		m_collision(false){}
+		m_collision(false){
+		m_box = new sf::FloatRect(0, 0, 100, 100);
+	}
 
 	////////////////////////////////////////////////////////////
 	/// Destructor (for overriding virtual function in abstract 

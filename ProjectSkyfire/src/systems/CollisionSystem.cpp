@@ -22,9 +22,8 @@ void CollisionSystem::update()
 				{
 					if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 					{
-						if (static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(
-							sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,
-								sf::Mouse::getPosition((*m_window)).y)))
+
+						if (static_cast<BoxColliderComponent*>((*i)->getComponents().at(j))->getBox()->contains(sf::Vector2f(sf::Mouse::getPosition((*m_window)).x,sf::Mouse::getPosition((*m_window)).y)))
 						{
 							buttonPressed = 0;
 							std::cout << "DEBUG" << std::endl;
